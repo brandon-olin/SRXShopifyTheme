@@ -1,0 +1,44 @@
+<div class="page-width">
+  {%- assign img_url = section.settings.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+  {%- if section.settings.image != blank -%}
+  <img class="hero-fixed-width__image lazyload lazypreload"
+       id="pressable-image"
+       data-src="{{ img_url }}"
+       data-widths="[180, 360, 470, 600, 770, 970, 1060, 1280, 1512, 1728, 2048]"
+       data-aspectratio="{{ section.settings.image.aspect_ratio }}"
+       data-sizes="auto"
+       style="width: 500px; height: 500px;"
+
+       alt="{{ section.settings.image.alt | escape }}">
+    <audio src="{{ section.settings.sound }}" id="audio-sound-element">
+  {%- else -%}
+    <span>
+      {% capture current %}{% cycle 1, 2 %}{% endcapture %}
+      {{ 'lifestyle-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+    </span>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Image with sound effect",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"  
+    },
+    {
+      "type": "url",
+      "id": "sound",
+      "label": "Link to sound file"
+    }
+  ],
+  "presets": [
+    {
+      "category": "Image",
+      "name":"Image with sound effect"
+    }
+  ]
+}
+{% endschema %}
