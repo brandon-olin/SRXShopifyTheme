@@ -9685,3 +9685,11 @@ function removeImageLoadingAnimation(image) {
     imageWrapper.removeAttribute('data-image-loading-animation');
   }
 }
+
+// Get hero image and trigger sound file on press
+if (document.getElementById('pressable-image')) {
+  $('#pressable-image').click(() => {
+    const audio = new Audio(document.getElementById('audio-sound-element').src)
+    audio.play()
+  })
+}
